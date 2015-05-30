@@ -551,6 +551,39 @@ bool GAFObject::playSequence(const std::string& name, bool looped, bool resume /
     return true;
 }
 
+
+bool GAFObject::playSequence(uint32_t s, uint32_t e, bool looped, bool resume /*= true*/)
+{
+	if (!m_asset || !m_timeline)
+	{
+		return false;
+	}
+
+	if (IDNONE == s || IDNONE == e)
+	{
+		return false;
+	}
+
+	m_currentSequenceStart = s;
+	m_currentSequenceEnd = e;
+
+	m_currentFrame = m_isReversed ? (e - 1) : (s);
+
+	setLooped(looped, false);
+
+	if (resume)
+	{
+		resumeAnimation();
+	}
+	else
+	{
+		stop();
+	}
+
+	return true;
+}
+
+
 void GAFObject::clearSequence()
 {
     m_currentSequenceStart = GAFFirstFrameIndex;

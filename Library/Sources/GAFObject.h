@@ -153,6 +153,8 @@ public:
 
     bool        playSequence(const std::string& name, bool looped, bool resume = true);
 
+	bool        playSequence(uint32_t s, uint32_t e, bool looped, bool resume = true);
+
     /// Stops playing an animation as a sequence
     void        clearSequence();
 
